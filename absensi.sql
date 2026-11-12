@@ -8,6 +8,8 @@
 -- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+CREATE DATABASE IF NOT EXISTS `absensi` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `absensi`;
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";

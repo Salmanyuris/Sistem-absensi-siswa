@@ -1,5 +1,23 @@
 <?php
 include "koneksi.php";
+if (!$koneksi) {
+    http_response_code(503);
+    ?>
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Database belum siap | Absensi Sekolah</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body><main class="edit-page"><section class="edit-card"><?php include "database-error.php"; ?></section></main></body>
+    </html>
+    <?php
+    exit;
+}
+
 $nis = $_GET['id'];
 $sql = "SELECT * FROM siswa WHERE nis='$nis'";
 $result = mysqli_query($koneksi, $sql);

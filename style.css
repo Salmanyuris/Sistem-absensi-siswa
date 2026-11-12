@@ -454,6 +454,52 @@ body {
     text-align: center;
 }
 
+.database-notice {
+    display: flex;
+    max-width: 760px;
+    align-items: flex-start;
+    gap: 16px;
+    margin: 18px auto;
+    padding: 22px;
+    border: 1px solid #f0dfb8;
+    border-radius: 12px;
+    background: #fffaf0;
+    color: #574522;
+}
+
+.database-notice-icon {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff0c8;
+    color: #a56a08;
+    font-weight: 800;
+}
+
+.database-notice h2 {
+    margin: 2px 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.database-notice p {
+    margin: 0;
+    color: #78663e;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.database-notice small {
+    display: block;
+    margin-top: 9px;
+    color: #95845e;
+    font-size: 10px;
+}
+
 .app-footer {
     padding: 0 42px 24px;
     color: #9aa5b5;

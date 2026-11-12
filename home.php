@@ -1,5 +1,10 @@
 <?php
 include "koneksi.php";
+if (!$koneksi) {
+    include "database-error.php";
+    return;
+}
+
 $sql = "SELECT * FROM absen";
 $result = mysqli_query($koneksi, $sql);
 ?>
