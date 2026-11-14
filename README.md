@@ -16,7 +16,8 @@ Aplikasi web sederhana untuk mengelola data siswa dan mencatat absensi SMK Warna
 
 ## Persyaratan
 
-- PHP 7.3 atau lebih baru dengan ekstensi `mysqli`
+- PHP CLI 8.2.12 tersedia pada mesin pengembangan saat ini.
+- Kode ditujukan untuk PHP 7.3 atau lebih baru dengan ekstensi `mysqli`; versi 7.3 belum diuji langsung pada lingkungan ini.
 - MySQL atau MariaDB
 - Web server lokal seperti Laragon, XAMPP, atau PHP built-in server
 
