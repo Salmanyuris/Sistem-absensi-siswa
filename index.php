@@ -1,13 +1,11 @@
 <?php
-$page = isset($_GET['page']) ? $_GET['page'] : 'home';
 $pageTitles = array(
     'home' => 'Absensi',
     'data' => 'Data siswa',
     'tambah' => 'Tambah siswa',
 );
-if (!isset($pageTitles[$page])) {
-    $page = 'home';
-}
+$requestedPage = isset($_GET['page']) && is_string($_GET['page']) ? $_GET['page'] : 'home';
+$page = isset($pageTitles[$requestedPage]) ? $requestedPage : 'home';
 ?>
 <!DOCTYPE html>
 <html lang="id">
