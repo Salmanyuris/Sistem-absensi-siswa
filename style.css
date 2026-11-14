@@ -500,6 +500,13 @@ body {
     font-size: 10px;
 }
 
+.database-notice-detail {
+    margin: -12px 0 18px;
+    color: #95845e;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
 .app-footer {
     padding: 0 42px 24px;
     color: #9aa5b5;

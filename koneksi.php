@@ -1,13 +1,16 @@
 <?php
-$databaseError = null;
+mysqli_report(MYSQLI_REPORT_OFF);
 
-try {
-    $koneksi = @mysqli_connect("localhost", "root", "", "absensi");
-} catch (mysqli_sql_exception $exception) {
+$databaseHost = "localhost";
+$databaseUser = "root";
+$databasePassword = "";
+$databaseName = "absensi";
+
+$koneksi = mysqli_connect($databaseHost, $databaseUser, $databasePassword, $databaseName);
+$databaseError = $koneksi ? null : mysqli_connect_error();
+
+if ($koneksi && !mysqli_set_charset($koneksi, "utf8mb4")) {
+    $databaseError = mysqli_error($koneksi);
+    mysqli_close($koneksi);
     $koneksi = false;
-    $databaseError = $exception->getMessage();
-}
-
-if (!$koneksi && $databaseError === null) {
-    $databaseError = mysqli_connect_error();
 }

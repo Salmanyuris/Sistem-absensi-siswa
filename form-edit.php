@@ -2,26 +2,66 @@
 include "koneksi.php";
 if (!$koneksi) {
     http_response_code(503);
-    ?>
-    <!DOCTYPE html>
-    <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Database belum siap | Absensi Sekolah</title>
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body><main class="edit-page"><section class="edit-card"><?php include "database-error.php"; ?></section></main></body>
-    </html>
-    <?php
+    $errorTitle = "Database belum siap";
+    $errorMessage = "Pastikan MySQL aktif dan database absensi tersedia.";
+    $errorDetail = $databaseError;
+    include "page-error.php";
     exit;
 }
 
-$nis = $_GET['id'];
-$sql = "SELECT * FROM siswa WHERE nis='$nis'";
-$result = mysqli_query($koneksi, $sql);
-$data = mysqli_fetch_assoc($result);
+$nis = isset($_GET['id']) && is_string($_GET['id']) ? trim($_GET['id']) : "";
+if ($nis === "" || !preg_match('/^[0-9]+$/', $nis)) {
+    http_response_code(400);
+    $errorTitle = "NIS tidak valid";
+    $errorMessage = "Data siswa tidak dapat dimuat karena NIS tidak valid.";
+    $errorBackUrl = "index.php?page=data";
+    include "page-error.php";
+    exit;
+}
+
+$statement = mysqli_prepare($koneksi, "SELECT nis, nama, alamat, jenis_kelamin, agama FROM siswa WHERE nis = ?");
+if (!$statement) {
+    http_response_code(500);
+    $errorTitle = "Data siswa gagal dimuat";
+    $errorMessage = "Terjadi kesalahan saat menyiapkan permintaan data.";
+    $errorDetail = mysqli_error($koneksi);
+    $errorBackUrl = "index.php?page=data";
+    include "page-error.php";
+    exit;
+}
+
+mysqli_stmt_bind_param($statement, "s", $nis);
+if (!mysqli_stmt_execute($statement)) {
+    http_response_code(500);
+    $errorTitle = "Data siswa gagal dimuat";
+    $errorMessage = "Terjadi kesalahan saat membaca data siswa.";
+    $errorDetail = mysqli_stmt_error($statement);
+    $errorBackUrl = "index.php?page=data";
+    include "page-error.php";
+    exit;
+}
+
+$studentNis = $studentName = $studentAddress = $gender = $religion = null;
+mysqli_stmt_bind_result($statement, $studentNis, $studentName, $studentAddress, $gender, $religion);
+$found = mysqli_stmt_fetch($statement);
+mysqli_stmt_close($statement);
+
+if (!$found) {
+    http_response_code(404);
+    $errorTitle = "Siswa tidak ditemukan";
+    $errorMessage = "Data siswa dengan NIS tersebut tidak tersedia.";
+    $errorBackUrl = "index.php?page=data";
+    include "page-error.php";
+    exit;
+}
+
+$data = array(
+    "nis" => $studentNis,
+    "nama" => $studentName,
+    "alamat" => $studentAddress,
+    "jenis_kelamin" => $gender,
+    "agama" => $religion,
+);
 ?>
 <!DOCTYPE html>
 <html lang="id">

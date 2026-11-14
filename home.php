@@ -7,6 +7,11 @@ if (!$koneksi) {
 
 $sql = "SELECT * FROM absen";
 $result = mysqli_query($koneksi, $sql);
+if (!$result) {
+    $databaseError = mysqli_error($koneksi);
+    include "database-error.php";
+    return;
+}
 ?>
 
 <div class="page-intro">

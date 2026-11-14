@@ -2,7 +2,7 @@
     <span class="database-notice-icon">!</span>
     <div>
         <h2>Database belum siap</h2>
-        <p>Data aplikasi belum bisa dimuat. Impor file <strong>absensi.sql</strong> melalui phpMyAdmin, lalu muat ulang halaman ini.</p>
+        <p>Data aplikasi belum bisa dimuat. Pastikan MySQL aktif dan database <strong>absensi</strong> beserta tabelnya sudah tersedia.</p>
         <?php if (!empty($databaseError)) { ?>
             <small>Koneksi database: <?= htmlspecialchars($databaseError, ENT_QUOTES, 'UTF-8') ?></small>
         <?php } ?>
