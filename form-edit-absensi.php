@@ -1,4 +1,5 @@
 <?php
+require_once "app-helpers.php";
 include "koneksi.php";
 if (!$koneksi) {
     http_response_code(503);
@@ -9,8 +10,8 @@ if (!$koneksi) {
     exit;
 }
 
-$nis = isset($_GET['id']) && is_string($_GET['id']) ? trim($_GET['id']) : "";
-if ($nis === "" || !preg_match('/^[0-9]+$/', $nis)) {
+$nis = request_string($_GET, "id");
+if (!is_valid_nis($nis)) {
     http_response_code(400);
     $errorTitle = "NIS tidak valid";
     $errorMessage = "Data absensi tidak dapat dimuat karena NIS tidak valid.";
