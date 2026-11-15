@@ -1,25 +1,24 @@
 # Sistem Absensi Siswa
 
-Aplikasi web sederhana untuk mengelola data siswa dan mencatat absensi SMK Warna Dunia. Antarmuka menggunakan Bootstrap dan CSS khusus, dengan halaman yang responsif untuk desktop maupun perangkat seluler.
+Aplikasi web untuk mencatat kehadiran dan mengelola data siswa SMK Warna Dunia. Aplikasi dibuat dengan PHP dan MySQL, serta menggunakan Bootstrap untuk tampilan yang responsif.
 
 ## Fitur
 
-- Melihat, menambah, mengubah, dan menghapus data siswa.
-- Mencatat, melihat, mengubah, dan menghapus absensi siswa.
-- Menampilkan pesan panduan jika database belum tersedia.
+- Mencatat, melihat, mengubah, dan menghapus data absensi.
+- Menambah, melihat, mengubah, dan menghapus data siswa.
+- Menampilkan informasi saat koneksi database bermasalah.
 
 ## Teknologi
 
 - PHP dengan ekstensi MySQLi
 - MySQL atau MariaDB
-- Bootstrap 5 (disertakan di `assets/`)
+- Bootstrap 5 (tersedia di folder `assets/`)
 
 ## Persyaratan
 
-- PHP CLI 8.2.12 tersedia pada mesin pengembangan saat ini.
-- Kode ditujukan untuk PHP 7.3 atau lebih baru dengan ekstensi `mysqli`; versi 7.3 belum diuji langsung pada lingkungan ini.
+- PHP 7.3 atau lebih baru dengan ekstensi `mysqli`. PHP CLI 8.2.12 tersedia di lingkungan pengembangan saat ini; versi minimum belum diuji langsung.
 - MySQL atau MariaDB
-- Web server lokal seperti Laragon, XAMPP, atau PHP built-in server
+- Web server lokal, seperti Laragon atau XAMPP. PHP built-in server juga dapat digunakan.
 
 ## Instalasi
 
