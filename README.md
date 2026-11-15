@@ -56,15 +56,15 @@ Dari folder proyek, jalankan:
 php -S 127.0.0.1:8089
 ```
 
-Kemudian buka `http://127.0.0.1:8089/`.
+Pastikan MySQL/MariaDB tetap berjalan, lalu buka `http://127.0.0.1:8089/`.
 
 ## Navigasi
 
-- **Absensi** (`index.php?page=home`): mencatat dan mengelola kehadiran.
+- **Absensi** (`index.php?page=home`): mencatat dan mengelola kehadiran siswa.
 - **Data siswa** (`index.php?page=data`): melihat dan mengelola informasi siswa.
-- **Tambah siswa** (`index.php?page=tambah`): memasukkan siswa baru.
+- **Tambah siswa** (`index.php?page=tambah`): memasukkan data siswa baru.
 
 ## Catatan
 
-- Koneksi database pada konfigurasi bawaan memakai akun lokal tanpa password. Untuk lingkungan selain pengembangan lokal, gunakan kredensial database yang sesuai.
-- Aplikasi ini belum menyediakan autentikasi pengguna.
+- Konfigurasi bawaan menggunakan akun database lokal tanpa password. Gunakan kredensial yang aman untuk lingkungan selain pengembangan lokal.
+- Aplikasi belum menyediakan autentikasi pengguna.
