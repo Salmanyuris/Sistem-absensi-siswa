@@ -22,7 +22,7 @@ Aplikasi web untuk mencatat kehadiran dan mengelola data siswa SMK Warna Dunia. 
 
 ## Instalasi
 
-1. Clone repository ke folder web server lokal:
+1. Clone repository ke komputer Anda:
 
    ```bash
    git clone https://github.com/Salmanyuris/Sistem-absensi-siswa.git
@@ -31,18 +31,22 @@ Aplikasi web untuk mencatat kehadiran dan mengelola data siswa SMK Warna Dunia. 
 
 2. Jalankan MySQL/MariaDB.
 
-3. Buat database dan tabel dengan mengimpor [`absensi.sql`](./absensi.sql) melalui phpMyAdmin atau MySQL client. File tersebut membuat database `absensi`, tabel `siswa` dan `absen`, serta menyertakan beberapa contoh data. Cukup impor sekali untuk instalasi baru.
+3. Buat database beserta tabel dengan mengimpor file [`absensi.sql`](./absensi.sql) melalui phpMyAdmin atau MySQL client. File ini membuat database `absensi`, tabel `siswa` dan `absen`, serta beberapa data contoh. Impor file satu kali untuk instalasi baru.
 
-4. Periksa konfigurasi koneksi di [`koneksi.php`](./koneksi.php). Nilai bawaan proyek:
+4. Sesuaikan pengaturan koneksi di [`koneksi.php`](./koneksi.php) jika konfigurasi MySQL lokal Anda berbeda. Nilai bawaan:
 
-   - Host: `localhost`
-   - User: `root`
-   - Password: kosong
-   - Database: `absensi`
+   | Pengaturan | Nilai |
+   | --- | --- |
+   | Host | `localhost` |
+   | User | `root` |
+   | Password | kosong |
+   | Database | `absensi` |
 
-   Sesuaikan nilai pada file tersebut jika konfigurasi MySQL lokal Anda berbeda.
+5. Buka aplikasi melalui web server. Contoh URL jika menggunakan Laragon:
 
-5. Buka aplikasi melalui URL web server, misalnya `http://localhost/Sistem-absensi-siswa/`.
+   ```text
+   http://localhost/Sistem-absensi-siswa/
+   ```
 
 ### Menjalankan dengan PHP built-in server
 
