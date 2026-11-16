@@ -6,6 +6,7 @@ Aplikasi web untuk mencatat kehadiran dan mengelola data siswa SMK Warna Dunia. 
 
 - Mencatat, melihat, mengubah, dan menghapus data absensi.
 - Menambah, melihat, mengubah, dan menghapus data siswa.
+- Mencari siswa berdasarkan NIS atau nama, memfilter jenis kelamin, mengurutkan, dan menelusuri data dengan pagination.
 - Menampilkan informasi saat koneksi database bermasalah.
 
 ## Teknologi
