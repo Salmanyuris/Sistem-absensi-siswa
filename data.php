@@ -236,6 +236,7 @@ $pageUrl = function ($targetPage) use ($search, $gender, $sort) {
                         <td><?= htmlspecialchars($student["jenis_kelamin"], ENT_QUOTES, "UTF-8") ?></td>
                         <td><?= htmlspecialchars($student["agama"], ENT_QUOTES, "UTF-8") ?></td>
                         <td class="actions">
+                            <a href="index.php?page=detail&amp;id=<?= urlencode($student["nis"]) ?>" class="btn btn-sm btn-light">Detail</a>
                             <a href="form-edit.php?id=<?= urlencode($student["nis"]) ?>" class="btn btn-sm btn-soft-primary">Edit</a>
                             <a href="hapus.php?id=<?= urlencode($student["nis"]) ?>" class="btn btn-sm btn-soft-danger" onclick="return confirm('Hapus data siswa ini?')">Hapus</a>
                         </td>

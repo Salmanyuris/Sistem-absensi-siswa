@@ -2,6 +2,7 @@
 $pageTitles = array(
     'home' => 'Absensi',
     'data' => 'Data siswa',
+    'detail' => 'Detail siswa',
     'tambah' => 'Tambah siswa',
 );
 $requestedPage = isset($_GET['page']) && is_string($_GET['page']) ? $_GET['page'] : 'home';
@@ -35,7 +36,7 @@ $page = isset($pageTitles[$requestedPage]) ? $requestedPage : 'home';
                 <a class="<?= $page === 'home' ? 'active' : '' ?>" href="index.php?page=home">
                     <span class="nav-icon">◷</span> Absensi
                 </a>
-                <a class="<?= $page === 'data' ? 'active' : '' ?>" href="index.php?page=data">
+                <a class="<?= in_array($page, array('data', 'detail'), true) ? 'active' : '' ?>" href="index.php?page=data">
                     <span class="nav-icon">▦</span> Data siswa
                 </a>
             </nav>
@@ -74,6 +75,9 @@ $page = isset($pageTitles[$requestedPage]) ? $requestedPage : 'home';
                 switch ($page) {
                     case 'data':
                         include "data.php";
+                        break;
+                    case 'detail':
+                        include "detail-siswa.php";
                         break;
                     case 'tambah':
                         include "form-tambah.php";
