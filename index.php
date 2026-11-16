@@ -16,11 +16,12 @@ $page = isset($pageTitles[$requestedPage]) ? $requestedPage : 'home';
     <title><?= htmlspecialchars($pageTitles[$page], ENT_QUOTES, 'UTF-8') ?> | Absensi Sekolah</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="assets/js/app.js" defer></script>
 </head>
 
 <body>
     <div class="app-shell">
-        <aside class="sidebar">
+        <aside class="sidebar" id="primary-sidebar">
             <a class="brand" href="index.php?page=home">
                 <span class="brand-mark">A</span>
                 <span>
@@ -47,12 +48,20 @@ $page = isset($pageTitles[$requestedPage]) ? $requestedPage : 'home';
                 </div>
             </div>
         </aside>
+        <button class="sidebar-backdrop" type="button" aria-label="Tutup menu navigasi" hidden></button>
 
         <main class="main-content">
             <header class="topbar">
-                <div>
-                    <span class="eyebrow">MANAJEMEN SEKOLAH</span>
-                    <h1><?= htmlspecialchars($pageTitles[$page], ENT_QUOTES, 'UTF-8') ?></h1>
+                <div class="topbar-heading">
+                    <button class="menu-toggle" type="button" aria-controls="primary-sidebar" aria-expanded="false" aria-label="Buka menu navigasi">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div>
+                        <span class="eyebrow">MANAJEMEN SEKOLAH</span>
+                        <h1><?= htmlspecialchars($pageTitles[$page], ENT_QUOTES, 'UTF-8') ?></h1>
+                    </div>
                 </div>
                 <div class="profile-chip">
                     <span class="profile-avatar">A</span>
