@@ -26,7 +26,7 @@ if (!$koneksi) {
 
 $studentStatement = mysqli_prepare(
     $koneksi,
-    "SELECT nis, nama, alamat, jenis_kelamin, agama FROM siswa WHERE nis = ?"
+    "SELECT nis, nama, kelas, alamat, jenis_kelamin, agama FROM siswa WHERE nis = ?"
 );
 if (!$studentStatement) {
     error_log("Gagal menyiapkan detail siswa: " . mysqli_error($koneksi));
@@ -44,11 +44,12 @@ if (!mysqli_stmt_execute($studentStatement)) {
     return;
 }
 
-$studentNis = $studentName = $studentAddress = $studentGender = $studentReligion = null;
+$studentNis = $studentName = $studentClass = $studentAddress = $studentGender = $studentReligion = null;
 mysqli_stmt_bind_result(
     $studentStatement,
     $studentNis,
     $studentName,
+    $studentClass,
     $studentAddress,
     $studentGender,
     $studentReligion
@@ -135,6 +136,7 @@ mysqli_stmt_close($historyStatement);
 $student = array(
     "nis" => $studentNis,
     "nama" => $studentName,
+    "kelas" => $studentClass,
     "alamat" => $studentAddress,
     "jenis_kelamin" => $studentGender,
     "agama" => $studentReligion,
@@ -169,6 +171,12 @@ $student = array(
             <div>
                 <dt>Nama lengkap</dt>
                 <dd><?= htmlspecialchars($student["nama"], ENT_QUOTES, "UTF-8") ?></dd>
+            </div>
+            <div>
+                <dt>Kelas</dt>
+                <dd><?= $student["kelas"] !== ""
+                    ? htmlspecialchars($student["kelas"], ENT_QUOTES, "UTF-8")
+                    : "Belum diatur" ?></dd>
             </div>
             <div>
                 <dt>Jenis kelamin</dt>

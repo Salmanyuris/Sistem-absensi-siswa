@@ -20,7 +20,7 @@ if (!is_valid_nis($nis)) {
     exit;
 }
 
-$statement = mysqli_prepare($koneksi, "SELECT nis, nama, alamat, jenis_kelamin, agama FROM siswa WHERE nis = ?");
+$statement = mysqli_prepare($koneksi, "SELECT nis, nama, kelas, alamat, jenis_kelamin, agama FROM siswa WHERE nis = ?");
 if (!$statement) {
     http_response_code(500);
     $errorTitle = "Data siswa gagal dimuat";
@@ -42,8 +42,8 @@ if (!mysqli_stmt_execute($statement)) {
     exit;
 }
 
-$studentNis = $studentName = $studentAddress = $gender = $religion = null;
-mysqli_stmt_bind_result($statement, $studentNis, $studentName, $studentAddress, $gender, $religion);
+$studentNis = $studentName = $studentClass = $studentAddress = $gender = $religion = null;
+mysqli_stmt_bind_result($statement, $studentNis, $studentName, $studentClass, $studentAddress, $gender, $religion);
 $found = mysqli_stmt_fetch($statement);
 mysqli_stmt_close($statement);
 
@@ -59,6 +59,7 @@ if (!$found) {
 $data = array(
     "nis" => $studentNis,
     "nama" => $studentName,
+    "kelas" => $studentClass,
     "alamat" => $studentAddress,
     "jenis_kelamin" => $gender,
     "agama" => $religion,
@@ -88,6 +89,10 @@ $data = array(
                 <div class="mb-3">
                     <label class="form-label" for="nama">Nama siswa</label>
                     <input id="nama" type="text" class="form-control" name="nama" value="<?= htmlspecialchars($data['nama'], ENT_QUOTES, 'UTF-8') ?>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="kelas">Kelas</label>
+                    <input id="kelas" type="text" class="form-control" name="kelas" maxlength="30" value="<?= htmlspecialchars($data['kelas'], ENT_QUOTES, 'UTF-8') ?>" placeholder="Contoh: XI RPL 1" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="alamat">Alamat</label>

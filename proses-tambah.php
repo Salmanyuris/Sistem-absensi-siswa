@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST" || !isset($_POST["simpan"])) {
 
 $nis = request_string($_POST, "nis");
 $nama = request_string($_POST, "nama");
+$kelas = request_string($_POST, "kelas");
 $alamat = request_string($_POST, "alamat");
 $jenisKelamin = request_string($_POST, "jenis_kelamin");
 $agama = request_string($_POST, "agama");
@@ -19,6 +20,7 @@ $agama = request_string($_POST, "agama");
 if (
     !is_valid_nis($nis)
     || $nama === ""
+    || !is_valid_class($kelas)
     || $alamat === ""
     || !in_array($jenisKelamin, array("pria", "wanita"), true)
     || !in_array($agama, array("islam", "kristen", "budha", "katholik"), true)
@@ -28,13 +30,13 @@ if (
 
 $statement = mysqli_prepare(
     $koneksi,
-    "INSERT INTO siswa (nis, nama, alamat, jenis_kelamin, agama) VALUES (?, ?, ?, ?, ?)"
+    "INSERT INTO siswa (nis, nama, kelas, alamat, jenis_kelamin, agama) VALUES (?, ?, ?, ?, ?, ?)"
 );
 if (!$statement) {
     show_page_error(500, "Siswa gagal disimpan", "Permintaan penyimpanan siswa tidak dapat disiapkan.", "index.php?page=tambah", mysqli_error($koneksi));
 }
 
-mysqli_stmt_bind_param($statement, "issss", $nis, $nama, $alamat, $jenisKelamin, $agama);
+mysqli_stmt_bind_param($statement, "isssss", $nis, $nama, $kelas, $alamat, $jenisKelamin, $agama);
 if (!mysqli_stmt_execute($statement)) {
     show_page_error(500, "Siswa gagal disimpan", "Periksa NIS dan data yang dimasukkan, lalu coba lagi.", "index.php?page=tambah", mysqli_stmt_error($statement));
 }

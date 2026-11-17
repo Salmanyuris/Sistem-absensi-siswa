@@ -10,17 +10,18 @@ if (!$koneksi) {
     exit;
 }
 
-$nis = request_string($_GET, "id");
-if (!is_valid_nis($nis)) {
+$nis = request_string($_GET, "nis");
+$tanggal = request_string($_GET, "tanggal");
+if (!is_valid_nis($nis) || !is_valid_date($tanggal)) {
     http_response_code(400);
     $errorTitle = "NIS tidak valid";
-    $errorMessage = "Data absensi tidak dapat dimuat karena NIS tidak valid.";
+    $errorMessage = "Data absensi tidak dapat dimuat karena NIS atau tanggal tidak valid.";
     $errorBackUrl = "index.php?page=home";
     include "page-error.php";
     exit;
 }
 
-$statement = mysqli_prepare($koneksi, "SELECT nis, nama, jam_absen, tanggal FROM absen WHERE nis = ?");
+$statement = mysqli_prepare($koneksi, "SELECT nis, nama, jam_absen, tanggal FROM absen WHERE nis = ? AND tanggal = ?");
 if (!$statement) {
     http_response_code(500);
     $errorTitle = "Data absensi gagal dimuat";
@@ -31,7 +32,7 @@ if (!$statement) {
     exit;
 }
 
-mysqli_stmt_bind_param($statement, "s", $nis);
+mysqli_stmt_bind_param($statement, "is", $nis, $tanggal);
 if (!mysqli_stmt_execute($statement)) {
     http_response_code(500);
     $errorTitle = "Data absensi gagal dimuat";
@@ -80,6 +81,8 @@ $data = array(
             <h1>Edit data absensi</h1>
             <p class="edit-subtitle">Perbarui detail kehadiran siswa, lalu simpan perubahan.</p>
             <form action="proses-edit-absensi.php" method="post">
+                <input type="hidden" name="nis_awal" value="<?= htmlspecialchars($data['nis'], ENT_QUOTES, 'UTF-8') ?>">
+                <input type="hidden" name="tanggal_awal" value="<?= htmlspecialchars($data['tanggal'], ENT_QUOTES, 'UTF-8') ?>">
                 <div class="mb-3">
                     <label class="form-label" for="nis">NIS</label>
                     <input id="nis" type="text" class="form-control" name="nis" value="<?= htmlspecialchars($data['nis'], ENT_QUOTES, 'UTF-8') ?>" required>

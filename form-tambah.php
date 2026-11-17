@@ -11,6 +11,10 @@
             <input id="nama" type="text" class="form-control" name="nama" placeholder="Masukkan nama lengkap" required>
         </div>
         <div class="mb-3">
+            <label class="form-label" for="kelas">Kelas</label>
+            <input id="kelas" type="text" class="form-control" name="kelas" maxlength="30" placeholder="Contoh: XI RPL 1" required>
+        </div>
+        <div class="mb-3">
             <label class="form-label" for="alamat">Alamat</label>
             <input id="alamat" type="text" class="form-control" name="alamat" placeholder="Masukkan alamat" required>
         </div>

@@ -93,7 +93,7 @@ $totalPages = max(1, (int) ceil($totalRows / $pageSize));
 $currentPage = min($currentPage, $totalPages);
 $offset = ($currentPage - 1) * $pageSize;
 
-$studentSql = "SELECT nis, nama, alamat, jenis_kelamin, agama FROM siswa"
+$studentSql = "SELECT nis, nama, kelas, alamat, jenis_kelamin, agama FROM siswa"
     . $criteriaSql
     . " ORDER BY " . $sortOptions[$sort]["sql"]
     . " LIMIT ? OFFSET ?";
@@ -120,11 +120,12 @@ if (!mysqli_stmt_execute($studentStatement)) {
     show_page_error(500, "Data siswa gagal dimuat", "Daftar siswa tidak dapat dimuat saat ini.", "index.php?page=data");
 }
 
-$studentNis = $studentName = $studentAddress = $studentGender = $studentReligion = null;
+$studentNis = $studentName = $studentClass = $studentAddress = $studentGender = $studentReligion = null;
 mysqli_stmt_bind_result(
     $studentStatement,
     $studentNis,
     $studentName,
+    $studentClass,
     $studentAddress,
     $studentGender,
     $studentReligion
@@ -135,6 +136,7 @@ while (mysqli_stmt_fetch($studentStatement)) {
     $students[] = array(
         "nis" => $studentNis,
         "nama" => $studentName,
+        "kelas" => $studentClass,
         "alamat" => $studentAddress,
         "jenis_kelamin" => $studentGender,
         "agama" => $studentReligion,
@@ -220,6 +222,7 @@ $pageUrl = function ($targetPage) use ($search, $gender, $sort) {
                     <th>No.</th>
                     <th>NIS</th>
                     <th>Nama siswa</th>
+                    <th>Kelas</th>
                     <th>Alamat</th>
                     <th>Jenis kelamin</th>
                     <th>Agama</th>
@@ -232,6 +235,9 @@ $pageUrl = function ($targetPage) use ($search, $gender, $sort) {
                         <td class="row-number"><?= $firstResult + $index ?></td>
                         <td><?= htmlspecialchars($student["nis"], ENT_QUOTES, "UTF-8") ?></td>
                         <td class="student-name"><?= htmlspecialchars($student["nama"], ENT_QUOTES, "UTF-8") ?></td>
+                        <td><?= $student["kelas"] !== ""
+                            ? htmlspecialchars($student["kelas"], ENT_QUOTES, "UTF-8")
+                            : "Belum diatur" ?></td>
                         <td><?= htmlspecialchars($student["alamat"], ENT_QUOTES, "UTF-8") ?></td>
                         <td><?= htmlspecialchars($student["jenis_kelamin"], ENT_QUOTES, "UTF-8") ?></td>
                         <td><?= htmlspecialchars($student["agama"], ENT_QUOTES, "UTF-8") ?></td>
@@ -243,7 +249,7 @@ $pageUrl = function ($targetPage) use ($search, $gender, $sort) {
                     </tr>
                 <?php } ?>
                 <?php if ($totalRows === 0) { ?>
-                    <tr><td colspan="7" class="empty-state">Tidak ada siswa yang cocok dengan pencarian.</td></tr>
+                    <tr><td colspan="8" class="empty-state">Tidak ada siswa yang cocok dengan pencarian.</td></tr>
                 <?php } ?>
             </tbody>
         </table>

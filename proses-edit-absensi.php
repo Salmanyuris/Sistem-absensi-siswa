@@ -11,23 +11,32 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST" || !isset($_POST["simpan"])) {
 }
 
 $nis = request_string($_POST, "nis");
+$nisAwal = request_string($_POST, "nis_awal");
 $nama = request_string($_POST, "nama");
 $jamAbsen = request_string($_POST, "jam_absen");
 $tanggal = request_string($_POST, "tanggal");
+$tanggalAwal = request_string($_POST, "tanggal_awal");
 
-if (!is_valid_nis($nis) || $nama === "" || !is_valid_time($jamAbsen) || !is_valid_date($tanggal)) {
+if (
+    !is_valid_nis($nis)
+    || !is_valid_nis($nisAwal)
+    || $nama === ""
+    || !is_valid_time($jamAbsen)
+    || !is_valid_date($tanggal)
+    || !is_valid_date($tanggalAwal)
+) {
     show_page_error(400, "Data absensi belum lengkap", "Periksa kembali NIS, nama, jam, dan tanggal absensi.", "index.php?page=home");
 }
 
 $statement = mysqli_prepare(
     $koneksi,
-    "UPDATE absen SET nama = ?, jam_absen = ?, tanggal = ? WHERE nis = ?"
+    "UPDATE absen SET nis = ?, nama = ?, jam_absen = ?, tanggal = ? WHERE nis = ? AND tanggal = ?"
 );
 if (!$statement) {
     show_page_error(500, "Perubahan absensi gagal disimpan", "Permintaan perubahan absensi tidak dapat disiapkan.", "index.php?page=home", mysqli_error($koneksi));
 }
 
-mysqli_stmt_bind_param($statement, "sssi", $nama, $jamAbsen, $tanggal, $nis);
+mysqli_stmt_bind_param($statement, "isssis", $nis, $nama, $jamAbsen, $tanggal, $nisAwal, $tanggalAwal);
 if (!mysqli_stmt_execute($statement)) {
     show_page_error(500, "Perubahan absensi gagal disimpan", "Periksa data yang dimasukkan, lalu coba lagi.", "index.php?page=home", mysqli_stmt_error($statement));
 }

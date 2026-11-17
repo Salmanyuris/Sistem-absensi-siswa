@@ -5,7 +5,9 @@ Aplikasi web untuk mencatat kehadiran dan mengelola data siswa SMK Warna Dunia. 
 ## Fitur
 
 - Mencatat, melihat, mengubah, dan menghapus data absensi.
+- Merekap absensi berdasarkan rentang tanggal dan kelas, dengan jumlah catatan dan siswa tercatat.
 - Menambah, melihat detail dan riwayat kehadiran, mengubah, dan menghapus data siswa.
+- Menyimpan kelas pada data siswa untuk mendukung filter rekap absensi.
 - Mencari siswa berdasarkan NIS atau nama, memfilter jenis kelamin, mengurutkan, dan menelusuri data dengan pagination.
 - Menampilkan informasi saat koneksi database bermasalah.
 
@@ -33,6 +35,7 @@ Aplikasi web untuk mencatat kehadiran dan mengelola data siswa SMK Warna Dunia. 
 2. Jalankan MySQL/MariaDB.
 
 3. Buat database beserta tabel dengan mengimpor file [`absensi.sql`](./absensi.sql) melalui phpMyAdmin atau MySQL client. File ini membuat database `absensi`, tabel `siswa` dan `absen`, serta beberapa data contoh. Impor file satu kali untuk instalasi baru.
+   Jika database sudah terpasang, jalankan [`migrasi-kelas-siswa.sql`](./migrasi-kelas-siswa.sql) satu kali. Migrasi menambah kolom kelas dan memungkinkan satu catatan absensi per siswa per tanggal. Data siswa lama mendapat kelas kosong; isi kelasnya lewat menu edit siswa agar dapat disertakan dalam filter kelas.
 
 4. Sesuaikan pengaturan koneksi di [`koneksi.php`](./koneksi.php) jika konfigurasi MySQL lokal Anda berbeda. Nilai bawaan:
 
@@ -63,6 +66,7 @@ Pastikan MySQL/MariaDB tetap berjalan, lalu buka `http://127.0.0.1:8089/`.
 
 - **Absensi** (`index.php?page=home`): mencatat dan mengelola kehadiran siswa.
 - **Data siswa** (`index.php?page=data`): melihat dan mengelola informasi siswa.
+- **Rekap absensi** (`index.php?page=rekap`): menyaring catatan berdasarkan tanggal mulai, tanggal akhir, dan kelas.
 - **Detail siswa** (`index.php?page=detail&id=<NIS>`): melihat identitas dan ringkasan catatan kehadiran.
 - **Tambah siswa** (`index.php?page=tambah`): memasukkan data siswa baru.
 

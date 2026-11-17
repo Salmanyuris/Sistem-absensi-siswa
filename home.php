@@ -5,7 +5,7 @@ if (!$koneksi) {
     return;
 }
 
-$sql = "SELECT * FROM absen";
+$sql = "SELECT * FROM absen ORDER BY tanggal DESC, jam_absen DESC, nis ASC";
 $result = mysqli_query($koneksi, $sql);
 if (!$result) {
     $databaseError = mysqli_error($koneksi);
@@ -83,8 +83,8 @@ if (!$result) {
                             <td><span class="time-badge"><?= htmlspecialchars($data['jam_absen'], ENT_QUOTES, 'UTF-8') ?></span></td>
                             <td><?= htmlspecialchars($data['tanggal'], ENT_QUOTES, 'UTF-8') ?></td>
                             <td class="actions">
-                                <a href="form-edit-absensi.php?id=<?= urlencode($data['nis']) ?>" class="btn btn-sm btn-soft-primary">Edit</a>
-                                <a href="hapus-absensi.php?id=<?= urlencode($data['nis']) ?>" class="btn btn-sm btn-soft-danger" onclick="return confirm('Hapus data absensi ini?')">Hapus</a>
+                                <a href="form-edit-absensi.php?nis=<?= urlencode($data['nis']) ?>&amp;tanggal=<?= urlencode($data['tanggal']) ?>" class="btn btn-sm btn-soft-primary">Edit</a>
+                                <a href="hapus-absensi.php?nis=<?= urlencode($data['nis']) ?>&amp;tanggal=<?= urlencode($data['tanggal']) ?>" class="btn btn-sm btn-soft-danger" onclick="return confirm('Hapus data absensi ini?')">Hapus</a>
                             </td>
                         </tr>
                     <?php } ?>

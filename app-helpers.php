@@ -40,6 +40,11 @@ function is_valid_date($date)
     return checkdate((int) $matches[2], (int) $matches[3], (int) $matches[1]);
 }
 
+function is_valid_class($class)
+{
+    return preg_match('/^[\p{L}\p{N}][\p{L}\p{N} .\/-]{0,29}$/u', $class) === 1;
+}
+
 function show_page_error($status, $title, $message, $backUrl, $detail = "")
 {
     http_response_code($status);

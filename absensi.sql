@@ -53,6 +53,7 @@ INSERT INTO `absen` (`nis`, `nama`, `jam_absen`, `tanggal`) VALUES
 CREATE TABLE `siswa` (
   `nis` int(11) NOT NULL,
   `nama` varchar(25) NOT NULL,
+  `kelas` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `alamat` varchar(25) NOT NULL,
   `jenis_kelamin` varchar(10) NOT NULL,
   `agama` varchar(25) NOT NULL
@@ -62,8 +63,8 @@ CREATE TABLE `siswa` (
 -- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`nis`, `nama`, `alamat`, `jenis_kelamin`, `agama`) VALUES
-(21098, 'ade nur arifianti', 'martoloyo', 'wanita', 'islam');
+INSERT INTO `siswa` (`nis`, `nama`, `kelas`, `alamat`, `jenis_kelamin`, `agama`) VALUES
+(21098, 'ade nur arifianti', '', 'martoloyo', 'wanita', 'islam');
 
 --
 -- Indexes for dumped tables
@@ -73,7 +74,7 @@ INSERT INTO `siswa` (`nis`, `nama`, `alamat`, `jenis_kelamin`, `agama`) VALUES
 -- Indexes for table `absen`
 --
 ALTER TABLE `absen`
-  ADD PRIMARY KEY (`nis`);
+  ADD PRIMARY KEY (`nis`, `tanggal`);
 
 --
 -- Indexes for table `siswa`
