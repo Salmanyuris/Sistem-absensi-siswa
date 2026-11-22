@@ -142,6 +142,13 @@ while (mysqli_stmt_fetch($studentStatement)) {
         "agama" => $studentReligion,
     );
 }
+$studentFetchError = mysqli_stmt_errno($studentStatement);
+if ($studentFetchError !== 0) {
+    $studentFetchMessage = mysqli_stmt_error($studentStatement);
+    mysqli_stmt_close($studentStatement);
+    error_log("Gagal membaca daftar siswa: " . $studentFetchMessage);
+    show_page_error(500, "Data siswa gagal dimuat", "Daftar siswa tidak dapat dimuat saat ini.", "index.php?page=data");
+}
 mysqli_stmt_close($studentStatement);
 
 $firstResult = $totalRows === 0 ? 0 : $offset + 1;
